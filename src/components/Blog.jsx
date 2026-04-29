@@ -5,6 +5,18 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import SplitText from "./SplitText.jsx";
 import BlobImage from "./BlobImage.jsx";
+import SquircleButton from "./SquircleButton.jsx";
+
+const ChevronLeft = (
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M15 6l-6 6 6 6" />
+  </svg>
+);
+const ChevronRight = (
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 6l6 6-6 6" />
+  </svg>
+);
 import { useT } from "@/i18n/I18nProvider";
 
 function fmtDate(d) {
@@ -58,28 +70,24 @@ export default function Blog({ posts = [] }) {
           </Link>
           {hasPosts && (
           <div className="row-nav" role="group" aria-label="Blog navigation">
-            <motion.button
-              className="row-nav__btn"
-              aria-label="前へ"
+            <SquircleButton
+              sq
+              color="white"
+              height={48}
+              icon={ChevronLeft}
+              iconColor="#0E1116"
+              ariaLabel="前へ"
               onClick={() => scroll(-1)}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 6l-6 6 6 6" />
-              </svg>
-            </motion.button>
-            <motion.button
-              className="row-nav__btn"
-              aria-label="次へ"
+            />
+            <SquircleButton
+              sq
+              color="lime"
+              height={48}
+              icon={ChevronRight}
+              iconColor="#0E1116"
+              ariaLabel="次へ"
               onClick={() => scroll(1)}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 6l6 6-6 6" />
-              </svg>
-            </motion.button>
+            />
           </div>
           )}
         </motion.div>

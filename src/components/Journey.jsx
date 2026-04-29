@@ -6,15 +6,27 @@ import { motion } from "motion/react";
 import SplitText from "./SplitText.jsx";
 import JourneyModal from "./JourneyModal.jsx";
 import BlobImage from "./BlobImage.jsx";
+import SquircleButton from "./SquircleButton.jsx";
+
+const ChevronLeft = (
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M15 6l-6 6 6 6" />
+  </svg>
+);
+const ChevronRight = (
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 6l6 6-6 6" />
+  </svg>
+);
 import { useT } from "@/i18n/I18nProvider";
 
 const fallback = [
-  { n: "01", name: "BALI, INDONESIA", desc: "自然と文化が共存する島で、\n心がリセットされた。", img: "/assets/photo/photo_mask_03.png", gallery: ["/assets/photo/photo_mask_03.png", "/assets/photo/photo_mask_01.png", "/assets/photo/photo_mask_02.png"] },
-  { n: "02", name: "PARIS, FRANCE", desc: "美しい街並みとアートに触れ、\n感性が磨かれた。", img: "/assets/photo/photo_mask_01.png", gallery: ["/assets/photo/photo_mask_01.png", "/assets/photo/photo_mask_04.png"] },
-  { n: "03", name: "NEW YORK, USA", desc: "多様な価値観が交差する街で、\n旅に刺激をもらった。", img: "/assets/photo/photo_mask_02.png", gallery: ["/assets/photo/photo_mask_02.png", "/assets/photo/photo_mask_05.png"] },
-  { n: "04", name: "BANGKOK, THAILAND", desc: "人の温かさと熱気に触れ、\n活力をもらった。", img: "/assets/photo/photo_mask_05.png", gallery: ["/assets/photo/photo_mask_05.png", "/assets/photo/photo_mask_03.png"] },
-  { n: "05", name: "BARCELONA, SPAIN", desc: "ガウディの建築と街並みに、\nクリエイティビティを刺激された。", img: "/assets/photo/photo_mask_01.png", gallery: ["/assets/photo/photo_mask_01.png", "/assets/photo/photo_mask_06.png"] },
-  { n: "06", name: "KYOTO, JAPAN", desc: "日本の美意識を再発見、\n侘び寂びを学んだ旅。", img: "/assets/photo/photo_mask_04.png", gallery: ["/assets/photo/photo_mask_04.png", "/assets/photo/photo_mask_06.png"] },
+  { n: "01", name: "BALI", country: "INDONESIA", desc: "自然と文化が共存する島で、\n心がリセットされた。", img: "/assets/photo/photo_mask_03.png", gallery: ["/assets/photo/photo_mask_03.png", "/assets/photo/photo_mask_01.png", "/assets/photo/photo_mask_02.png"] },
+  { n: "02", name: "PARIS", country: "FRANCE", desc: "美しい街並みとアートに触れ、\n感性が磨かれた。", img: "/assets/photo/photo_mask_01.png", gallery: ["/assets/photo/photo_mask_01.png", "/assets/photo/photo_mask_04.png"] },
+  { n: "03", name: "NEW YORK", country: "USA", desc: "多様な価値観が交差する街で、\n旅に刺激をもらった。", img: "/assets/photo/photo_mask_02.png", gallery: ["/assets/photo/photo_mask_02.png", "/assets/photo/photo_mask_05.png"] },
+  { n: "04", name: "BANGKOK", country: "THAILAND", desc: "人の温かさと熱気に触れ、\n活力をもらった。", img: "/assets/photo/photo_mask_05.png", gallery: ["/assets/photo/photo_mask_05.png", "/assets/photo/photo_mask_03.png"] },
+  { n: "05", name: "BARCELONA", country: "SPAIN", desc: "ガウディの建築と街並みに、\nクリエイティビティを刺激された。", img: "/assets/photo/photo_mask_01.png", gallery: ["/assets/photo/photo_mask_01.png", "/assets/photo/photo_mask_06.png"] },
+  { n: "06", name: "KYOTO", country: "JAPAN", desc: "日本の美意識を再発見、\n侘び寂びを学んだ旅。", img: "/assets/photo/photo_mask_04.png", gallery: ["/assets/photo/photo_mask_04.png", "/assets/photo/photo_mask_06.png"] },
 ];
 
 function mapDoc(doc) {
@@ -25,7 +37,8 @@ function mapDoc(doc) {
     .filter(Boolean);
   return {
     n: doc.number || "",
-    name: doc.country ? `${doc.name}, ${doc.country}` : doc.name,
+    name: doc.name,
+    country: doc.country || "",
     desc: doc.description || "",
     img: main,
     gallery: [main, ...gallery],
@@ -95,28 +108,24 @@ export default function Journey({ countries }) {
             transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
           />
           <div className="journey__nav" role="group" aria-label="Journey navigation">
-            <motion.button
-              className="prev"
-              aria-label="Previous"
+            <SquircleButton
+              sq
+              color="white"
+              height={48}
+              icon={ChevronLeft}
+              iconColor="#0E1116"
+              ariaLabel="Previous"
               onClick={() => scroll(-1)}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 6l-6 6 6 6" />
-              </svg>
-            </motion.button>
-            <motion.button
-              className="next"
-              aria-label="Next"
+            />
+            <SquircleButton
+              sq
+              color="lime"
+              height={48}
+              icon={ChevronRight}
+              iconColor="#0E1116"
+              ariaLabel="Next"
               onClick={() => scroll(1)}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 6l6 6-6 6" />
-              </svg>
-            </motion.button>
+            />
           </div>
         </motion.div>
 
@@ -140,16 +149,8 @@ export default function Journey({ countries }) {
               >
                 <BlobImage src={c.img} seed={100 + i * 7} count={5} duration={6} />
               </motion.div>
-              <div className="j-card__num">{c.n}</div>
-              <h4 className="j-card__name">{c.name}</h4>
-              <p className="j-card__desc">
-                {c.desc.split("\n").map((l, idx) => (
-                  <span key={idx}>
-                    {l}
-                    {idx < c.desc.split("\n").length - 1 && <br />}
-                  </span>
-                ))}
-              </p>
+              <p className="j-card__name">{c.name}</p>
+              <p className="j-card__tag">{c.country}</p>
               <span className="j-card__more">View more</span>
             </motion.article>
           ))}

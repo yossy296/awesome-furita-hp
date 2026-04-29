@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import SquircleButton from "./SquircleButton.jsx";
 
 export default function WorksModal({ open, item, allCards = [], activeIndex = 0, onClose, onSelect }) {
   const [photoIdx, setPhotoIdx] = useState(0);
@@ -106,9 +107,16 @@ export default function WorksModal({ open, item, allCards = [], activeIndex = 0,
                 </p>
               )}
               {item.href && item.href !== "#" && (
-                <a className="jcard__cta" href={item.href} target="_blank" rel="noopener">
-                  公式サイトへ <span>→</span>
-                </a>
+                <SquircleButton
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener"
+                  color="lime"
+                  height={56}
+                  className="jcard__cta-sq"
+                >
+                  公式サイトへ
+                </SquircleButton>
               )}
             </div>
 

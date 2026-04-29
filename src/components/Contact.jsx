@@ -2,8 +2,9 @@
 
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import SplitText from "./SplitText.jsx";
+import SquircleButton from "./SquircleButton.jsx";
 import { useT } from "@/i18n/I18nProvider";
 
 export default function Contact() {
@@ -120,26 +121,16 @@ export default function Contact() {
               transition={{ duration: 0.4 }}
             />
           </div>
-          <motion.button
+          <SquircleButton
             type="submit"
-            className="send-btn"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.96 }}
-            transition={{ type: "spring", stiffness: 400, damping: 18 }}
+            color="lime"
+            fullWidth
+            height={64}
+            disabled={sending}
+            className="send-btn-sq"
           >
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={label}
-                initial={{ y: 8, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -8, opacity: 0 }}
-                transition={{ duration: 0.25 }}
-              >
-                {label}
-              </motion.span>
-            </AnimatePresence>
-            <span className="arrow">→</span>
-          </motion.button>
+            {label}
+          </SquircleButton>
         </motion.form>
       </div>
     </section>
