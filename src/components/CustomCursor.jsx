@@ -48,8 +48,11 @@ export default function CustomCursor() {
         left: 0,
         x: sx,
         y: sy,
-        translateX: "-50%",
-        translateY: "-50%",
+        // Align the plane nose (≈ (17, 0) in the SVG after its inner transform)
+        // with the actual click point. Pivot scale/rotate from the same point.
+        translateX: "-17px",
+        translateY: "0px",
+        transformOrigin: "17px 0px",
         pointerEvents: "none",
         zIndex: 10000,
         willChange: "transform",
@@ -63,7 +66,7 @@ export default function CustomCursor() {
       transition={{ type: "spring", stiffness: 320, damping: 18 }}
       aria-hidden="true"
     >
-      <svg width="48" height="48" viewBox="0 0 48 48">
+      <svg width="48" height="48" viewBox="0 0 48 48" style={{ overflow: "visible" }}>
         <g transform="translate(48 0) scale(-1 1) rotate(-30 24 24)">
           <motion.path
             d="M42 6 L6 21 L20 27 L24 42 L30 28 L42 6 Z"

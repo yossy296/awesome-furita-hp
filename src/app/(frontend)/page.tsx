@@ -14,7 +14,7 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import SmoothScroll from "@/components/SmoothScroll";
 import FluidCursor from "@/components/FluidCursor";
-import CursorJetStream from "@/components/CursorJetStream";
+import CursorTrail from "@/components/CursorTrail";
 import CustomCursor from "@/components/CustomCursor";
 
 export const dynamic = "force-dynamic";
@@ -38,7 +38,7 @@ export default async function Home() {
   return (
     <>
       <FluidCursor />
-      <CursorJetStream />
+      <CursorTrail />
       <CustomCursor />
       <SmoothScroll />
       <Nav />

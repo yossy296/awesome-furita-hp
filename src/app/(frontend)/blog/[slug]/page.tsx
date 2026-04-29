@@ -8,7 +8,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import FluidCursor from "@/components/FluidCursor";
-import CursorJetStream from "@/components/CursorJetStream";
+import CursorTrail from "@/components/CursorTrail";
 import CustomCursor from "@/components/CustomCursor";
 import BlogReader from "@/components/blog/BlogReader";
 import BlogSidebar from "@/components/blog/BlogSidebar";
@@ -96,7 +96,7 @@ export default async function PostDetail({ params }: { params: Promise<{ slug: s
   return (
     <>
       <FluidCursor />
-      <CursorJetStream />
+      <CursorTrail />
       <CustomCursor />
       <SmoothScroll />
       <Nav />
