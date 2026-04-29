@@ -1,0 +1,647 @@
+/* ================================================
+   Furi Admin custom theme
+   =================================================*/
+
+:root {
+  --furi-paper: #FCFBF7;
+  --furi-paper-2: #F4F1E8;
+  --furi-ink: #0E1116;
+  --furi-ink-2: #4A5260;
+  --furi-ink-3: #8A93A0;
+  --furi-line: #E6E1D2;
+  --furi-lime: #DCFF1E;
+  --furi-cyan: #5DE7E0;
+}
+
+/* Brand glow on top */
+body[data-theme="light"] {
+  background-image: radial-gradient(
+      80% 60% at 80% -20%,
+      rgba(220, 255, 30, 0.15),
+      transparent 60%
+    ),
+    radial-gradient(60% 50% at 0% 0%, rgba(93, 231, 224, 0.12), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* === Dashboard === */
+.furi-admin {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 32px 80px;
+  font-family: "Inter", "Noto Sans JP", system-ui, sans-serif;
+  color: var(--furi-ink);
+}
+
+.furi-admin__hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 24px;
+  padding: 40px 36px;
+  margin-bottom: 28px;
+  border-radius: 22px;
+  background: linear-gradient(
+      135deg,
+      rgba(220, 255, 30, 0.18) 0%,
+      rgba(93, 231, 224, 0.18) 50%,
+      rgba(255, 179, 122, 0.16) 100%
+    ),
+    var(--furi-paper);
+  border: 1px solid var(--furi-line);
+  overflow: hidden;
+}
+.furi-admin__hero::before {
+  content: "";
+  position: absolute;
+  right: -80px;
+  top: -80px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(220, 255, 30, 0.55), transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+.furi-admin__eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--furi-ink-2);
+  margin: 0 0 12px;
+}
+.furi-admin__title {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0 0 14px;
+  color: var(--furi-ink);
+}
+.furi-admin__sub {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--furi-ink-2);
+  max-width: 560px;
+}
+.furi-admin__brand {
+  font-family: "Great Vibes", cursive;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--furi-ink);
+  position: relative;
+  z-index: 1;
+}
+
+/* === Cards grid === */
+.furi-admin__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.furi-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: var(--furi-paper);
+  border: 1px solid var(--furi-line);
+  text-decoration: none;
+  color: var(--furi-ink);
+  transition: transform 250ms ease, box-shadow 250ms, border-color 250ms;
+  overflow: hidden;
+}
+.furi-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--accent, var(--furi-lime)) 0%,
+    transparent 70%
+  );
+  opacity: 0.16;
+  z-index: 0;
+  transition: opacity 200ms;
+}
+.furi-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--furi-ink);
+  box-shadow: 0 14px 30px -16px rgba(14, 17, 22, 0.18);
+}
+.furi-card:hover::before {
+  opacity: 0.28;
+}
+.furi-card > * {
+  position: relative;
+  z-index: 1;
+}
+.furi-card__icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--furi-paper-2);
+  font-size: 22px;
+}
+.furi-card__body h3 {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin: 0 0 4px;
+  color: var(--furi-ink);
+}
+.furi-card__body p {
+  font-size: 11.5px;
+  margin: 0;
+  color: var(--furi-ink-2);
+  line-height: 1.6;
+}
+.furi-card__count {
+  text-align: right;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1;
+}
+.furi-card__count span {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--furi-ink);
+}
+.furi-card__count em {
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--furi-ink-3);
+  margin-top: 4px;
+}
+
+/* === Panels === */
+.furi-admin__panels {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .furi-admin__panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+.furi-panel {
+  background: var(--furi-paper);
+  border: 1px solid var(--furi-line);
+  border-radius: 18px;
+  padding: 22px 24px;
+}
+.furi-panel__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+.furi-panel__head h3 {
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0;
+}
+.furi-panel__head a {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--furi-ink-2);
+  text-decoration: none;
+}
+.furi-panel__head a:hover {
+  color: var(--furi-ink);
+}
+.furi-panel__empty {
+  font-size: 13px;
+  color: var(--furi-ink-2);
+  margin: 0;
+}
+.furi-panel__empty a {
+  color: var(--furi-ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* List */
+.furi-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.furi-list li + li {
+  border-top: 1px dashed var(--furi-line);
+}
+.furi-list a {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  text-decoration: none;
+  color: var(--furi-ink);
+  transition: padding-left 200ms;
+}
+.furi-list a:hover {
+  padding-left: 6px;
+}
+.furi-list__title {
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.furi-list__date {
+  font-size: 10.5px;
+  color: var(--furi-ink-3);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.furi-status {
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+.furi-status--published {
+  background: var(--furi-lime);
+  color: var(--furi-ink);
+}
+.furi-status--draft {
+  background: var(--furi-line);
+  color: var(--furi-ink-2);
+}
+
+/* Quick actions */
+.furi-quick {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.furi-quick__btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--furi-paper-2);
+  color: var(--furi-ink);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 180ms, background 180ms;
+}
+.furi-quick__btn span {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--furi-paper);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+}
+.furi-quick__btn:hover {
+  transform: translateX(3px);
+  background: var(--furi-line);
+}
+.furi-quick__btn--primary {
+  background: var(--furi-ink);
+  color: var(--furi-paper);
+}
+.furi-quick__btn--primary span {
+  background: var(--furi-lime);
+  color: var(--furi-ink);
+}
+.furi-quick__btn--primary:hover {
+  background: #1a1f29;
+}
+.furi-quick__btn--ghost {
+  background: transparent;
+  border: 1px dashed var(--furi-line);
+}
+
+/* === Tweak Payload built-ins === */
+.payload-default-graphic-icon { display: none !important; }
+.nav__brand .payload-default-graphic-logo { display: none !important; }
+
+/* ================================================
+   Sidebar block
+   ================================================*/
+.furi-side {
+  padding: 8px 8px 14px;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed var(--furi-line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.furi-side__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(220, 255, 30, 0.22),
+    rgba(93, 231, 224, 0.22)
+  );
+  text-decoration: none;
+  color: var(--furi-ink);
+  transition: transform 200ms;
+}
+.furi-side__brand:hover { transform: translateY(-1px); }
+.furi-side__brand-mark {
+  font-family: "Great Vibes", cursive;
+  font-size: 28px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--furi-ink);
+  color: var(--furi-paper);
+  line-height: 1;
+}
+.furi-side__brand-name {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.furi-side__brand-sub {
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--furi-ink-2);
+  text-transform: uppercase;
+}
+.furi-side__visit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  font-weight: 800;
+  color: var(--furi-ink);
+  background: var(--furi-paper);
+  border: 1px solid var(--furi-line);
+  border-radius: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 200ms;
+}
+.furi-side__visit:hover {
+  background: var(--furi-ink);
+  color: var(--furi-paper);
+  border-color: var(--furi-ink);
+}
+.furi-side__visit span {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--furi-lime);
+  color: var(--furi-ink);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+/* === Sidebar nav links (Payload built-in) === */
+.nav__wrapper { padding-top: 6px !important; }
+.nav .nav-group { margin-bottom: 14px; }
+.nav .nav-group__label,
+.nav .nav-group__toggle {
+  font-size: 10px !important;
+  letter-spacing: 0.22em !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  color: var(--furi-ink-3);
+}
+.nav__link {
+  position: relative;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 2px 4px !important;
+  padding: 9px 12px !important;
+  border-radius: 10px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  color: var(--furi-ink) !important;
+  transition: background 180ms, color 180ms, transform 180ms !important;
+}
+.nav__link::before {
+  content: "•";
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  background: var(--furi-paper-2);
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.nav__link[href*="posts"]::before    { content: "✍️"; }
+.nav__link[href*="countries"]::before { content: "🗺"; }
+.nav__link[href*="partners"]::before  { content: "🤝"; }
+.nav__link[href*="media"]::before     { content: "🖼"; }
+.nav__link[href*="contacts"]::before  { content: "📨"; }
+.nav__link[href*="users"]::before     { content: "👤"; }
+.nav__link:hover {
+  background: var(--furi-paper-2) !important;
+  transform: translateX(2px);
+}
+.nav__link.active {
+  background: var(--furi-ink) !important;
+  color: var(--furi-paper) !important;
+}
+.nav__link.active::before {
+  background: var(--furi-lime);
+  color: var(--furi-ink);
+}
+
+/* === Collection list page === */
+.list-header { padding-bottom: 14px !important; }
+.list-header h1 {
+  font-family: "Inter", "Noto Sans JP", sans-serif !important;
+  font-size: 28px !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.02em !important;
+}
+.collection-list__sub-header {
+  border-radius: 14px;
+  background: var(--furi-paper);
+  border: 1px solid var(--furi-line);
+  padding: 12px 14px !important;
+}
+.table {
+  border-radius: 16px !important;
+  overflow: hidden;
+  border: 1px solid var(--furi-line) !important;
+  background: var(--furi-paper);
+}
+.table thead {
+  background: var(--furi-paper-2);
+}
+.table thead th {
+  font-size: 10.5px !important;
+  letter-spacing: 0.18em !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  color: var(--furi-ink-2) !important;
+  padding: 14px 16px !important;
+  border-bottom: 1px solid var(--furi-line) !important;
+}
+.table tbody tr {
+  transition: background 160ms;
+}
+.table tbody tr:hover {
+  background: var(--furi-paper-2);
+}
+.table tbody td {
+  font-size: 13px !important;
+  padding: 14px 16px !important;
+  border-bottom: 1px dashed var(--furi-line) !important;
+}
+
+/* === Edit / Form pages === */
+.collection-edit__main,
+.document-fields {
+  background: var(--furi-paper);
+  border: 1px solid var(--furi-line);
+  border-radius: 18px;
+  padding: 24px 28px !important;
+}
+.field-type {
+  margin-bottom: 20px !important;
+}
+.field-type label,
+.field-label {
+  font-size: 11.5px !important;
+  letter-spacing: 0.16em !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  color: var(--furi-ink-2) !important;
+}
+input.field-input,
+textarea.field-input,
+.input-wrapper input,
+.input-wrapper textarea {
+  border-radius: 10px !important;
+  border: 1px solid var(--furi-line) !important;
+  background: var(--furi-paper) !important;
+  font-size: 14px !important;
+  transition: border-color 180ms, box-shadow 180ms;
+}
+input.field-input:focus,
+textarea.field-input:focus {
+  border-color: var(--furi-ink) !important;
+  box-shadow: 0 0 0 3px rgba(220, 255, 30, 0.4) !important;
+}
+
+/* Sidebar fields panel */
+.collection-edit__sidebar,
+.document-fields__sidebar-fields {
+  background: var(--furi-paper);
+  border-radius: 18px;
+  border: 1px solid var(--furi-line);
+  padding: 18px 20px !important;
+}
+
+/* Save / publish bar */
+.doc-controls__controls .btn,
+.btn--style-primary {
+  border-radius: 999px !important;
+  font-size: 11.5px !important;
+  letter-spacing: 0.16em !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  padding: 10px 22px !important;
+  transition: transform 180ms, box-shadow 180ms;
+}
+.btn--style-primary {
+  background: var(--furi-ink) !important;
+  color: var(--furi-paper) !important;
+  border-color: var(--furi-ink) !important;
+}
+.btn--style-primary:hover {
+  background: #1a1f29 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px -8px rgba(14, 17, 22, 0.3);
+}
+
+/* Per-document JA/EN switch banner */
+.furi-loc-switch {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 8px 14px;
+  margin: 0 0 18px auto;
+  width: fit-content;
+  background: linear-gradient(135deg, rgba(220,255,30,0.18), rgba(93,231,224,0.18));
+  border: 1px solid var(--furi-line);
+  border-radius: 14px;
+}
+.furi-loc-switch__label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--furi-ink-2);
+}
+.furi-loc-switch__btns {
+  display: inline-flex;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--furi-lime-deep, #B8DA00);
+  background: var(--furi-paper);
+  border-radius: 999px;
+  margin-left: auto;
+}
+.furi-loc-switch__btn {
+  padding: 7px 16px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  font-weight: 800;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--furi-ink-3);
+  cursor: pointer;
+  transition: all 180ms;
+}
+.furi-loc-switch__btn:hover { color: var(--furi-ink); }
+.furi-loc-switch__btn.active {
+  background: #DCFF1E;
+  color: var(--furi-ink);
+  box-shadow: 0 4px 12px -4px rgba(184,218,0,0.6);
+}

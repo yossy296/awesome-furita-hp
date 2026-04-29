@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+dist/
+.env
+.env.local
+data/payload.db
+data/payload.db-journal
+data/payload.db-shm
+data/payload.db-wal
+public/media/
+.DS_Store
+*.log

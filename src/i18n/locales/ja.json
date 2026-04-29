@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "journey": "Journey",
+    "works": "Works",
+    "blog": "Blog",
+    "contact": "Contact",
+    "menu": "メニューを開く"
+  },
+  "hero": {
+    "title1": "EXPLORE.",
+    "title2": "EXPERIENCE.",
+    "title3": "No regrets.",
+    "sub": "死ぬ時に後悔しない人生を",
+    "scroll": "SCROLL"
+  },
+  "about": {
+    "eyebrow": "About Me",
+    "title": "絶望から、世界へ",
+    "copyL1": "3度のうつ病、2024年にADHD診断。",
+    "copyL2": "人生のどん底で湧き上がったのは",
+    "copyL3": "「死ぬ時に後悔したくない」という思い。",
+    "copyL4": "バックパッカーとして世界へ飛び出し、",
+    "copyL5": "1ヶ月で22カ国、合計",
+    "countriesSuffix": "カ国",
+    "copyL6": "を踏破。",
+    "copyL7": "現在はソリューションセールスの傍ら、",
+    "sessionsSuffix": "名以上",
+    "copyL8": "との1on1で「次の一歩」を創る。",
+    "metaName": "Furi (ADHDバックパッカー)",
+    "metaLocation": "Tokyo, Japan / 32カ国踏破",
+    "metaJob": "Solution Sales / 1on1 Coach",
+    "metaSessions": "1on1 実績 400名以上",
+    "follow": "FOLLOW ME"
+  },
+  "what": {
+    "eyebrow": "What I Do",
+    "title1": "あなたの「一歩」を、",
+    "title2": "創り出す。",
+    "intro": "自身の挫折と世界を歩いた原体験から、立ち止まる人の次の一歩をサポートしています。",
+    "card1Title": "1ON1 SESSION",
+    "card1Desc": "400名以上との対話実績。\n立ち止まる人の次の一歩を支援。",
+    "card2Title": "SOLUTION SALES",
+    "card2Desc": "デジタルインフラの最前線で、\n実績を出し続けるセールス。",
+    "card3Title": "TRAVEL CONTENT",
+    "card3Desc": "32カ国を旅して見つけた、\n多様な価値観と物語を発信。",
+    "card4Title": "COMMUNITY",
+    "card4Desc": "自立して次の一歩を踏み出す、\n大人のためのコミュニティ。"
+  },
+  "journey": {
+    "eyebrow": "My Journey",
+    "title": "32カ国の旅路",
+    "modalCta": "VIEW FULL JOURNEY"
+  },
+  "works": {
+    "eyebrow": "Works",
+    "title": "WORKS & PARTNERS",
+    "intro": "旅とビジネスでの発信力が評価され、\n国内外の様々なブランドと提携しています。",
+    "viewMore": "View more →",
+    "modalLabel": "PARTNER",
+    "officialLink": "公式サイトへ"
+  },
+  "blog": {
+    "eyebrow": "Blog",
+    "title": "BLOG",
+    "intro": "旅・1on1・考えたことを綴っています。\n最新の記事をお届けします。",
+    "viewAll": "View more →",
+    "heroTitle": "BLOG",
+    "heroEyebrow": "My Blog",
+    "heroSub": "旅・1on1・考えたことを綴っています。",
+    "empty": "まだ公開された記事がありません。",
+    "categoriesHeading": "Categories",
+    "popularHeading": "Popular Posts",
+    "ctaTitle": "Let's Explore the World.",
+    "ctaSub": "旅とインスピレーションを、あなたに。",
+    "aboutMe": "ABOUT ME →"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "LET'S CONNECT!",
+    "intro": "お仕事のご依頼やご相談など、\nお気軽にご連絡ください。",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "SEND MESSAGE",
+    "sending": "SENDING...",
+    "thanks": "THANK YOU ✓",
+    "fillAll": "PLEASE FILL ALL FIELDS"
+  },
+  "footer": {
+    "copyright": "© 2026 Furi. All Rights Reserved."
+  },
+  "modal": {
+    "close": "閉じる",
+    "prev": "前へ",
+    "next": "次へ"
+  },
+  "lang": {
+    "label": "言語",
+    "ja": "日本語",
+    "en": "English"
+  }
+}

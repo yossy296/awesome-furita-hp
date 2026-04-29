@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "journey": "Journey",
+    "works": "Works",
+    "blog": "Blog",
+    "contact": "Contact",
+    "menu": "Open menu"
+  },
+  "hero": {
+    "title1": "EXPLORE.",
+    "title2": "EXPERIENCE.",
+    "title3": "No regrets.",
+    "sub": "A life with no regrets at the end.",
+    "scroll": "SCROLL"
+  },
+  "about": {
+    "eyebrow": "About Me",
+    "title": "From rock bottom to the world.",
+    "copyL1": "Three depressive episodes; ADHD diagnosed in 2024.",
+    "copyL2": "What rose from the lowest point",
+    "copyL3": "was the conviction: I refuse to die with regrets.",
+    "copyL4": "I left as a backpacker,",
+    "copyL5": "covered 22 countries in one month — ",
+    "countriesSuffix": " countries",
+    "copyL6": " in total.",
+    "copyL7": "Now, alongside front-line solution sales,",
+    "sessionsSuffix": "+ people",
+    "copyL8": " through 1-on-1 sessions, helping people take their next step.",
+    "metaName": "Furi (ADHD Backpacker)",
+    "metaLocation": "Tokyo, Japan / 32 countries",
+    "metaJob": "Solution Sales / 1on1 Coach",
+    "metaSessions": "400+ 1on1 sessions",
+    "follow": "FOLLOW ME"
+  },
+  "what": {
+    "eyebrow": "What I Do",
+    "title1": "Crafting your",
+    "title2": "next step.",
+    "intro": "Drawing from my own setbacks and travels around the world, I support those who are paused on their path.",
+    "card1Title": "1ON1 SESSION",
+    "card1Desc": "400+ conversations.\nSupporting your next step.",
+    "card2Title": "SOLUTION SALES",
+    "card2Desc": "Front-line digital\ninfrastructure sales.",
+    "card3Title": "TRAVEL CONTENT",
+    "card3Desc": "Stories and perspectives\nfrom 32 countries.",
+    "card4Title": "COMMUNITY",
+    "card4Desc": "A community for adults\nready to step forward."
+  },
+  "journey": {
+    "eyebrow": "My Journey",
+    "title": "32 Countries.",
+    "modalCta": "VIEW FULL JOURNEY"
+  },
+  "works": {
+    "eyebrow": "Works",
+    "title": "WORKS & PARTNERS",
+    "intro": "My voice on travel and business has earned\npartnerships with brands around the world.",
+    "viewMore": "View more →",
+    "modalLabel": "PARTNER",
+    "officialLink": "Visit official site"
+  },
+  "blog": {
+    "eyebrow": "Blog",
+    "title": "BLOG",
+    "intro": "Travels, 1on1 reflections, and thoughts.\nThe latest entries.",
+    "viewAll": "View more →",
+    "heroTitle": "BLOG",
+    "heroEyebrow": "My Blog",
+    "heroSub": "Travels, 1on1 reflections, and thoughts.",
+    "empty": "No published posts yet.",
+    "categoriesHeading": "Categories",
+    "popularHeading": "Popular Posts",
+    "ctaTitle": "Let's Explore the World.",
+    "ctaSub": "Travel and inspiration, delivered to you.",
+    "aboutMe": "ABOUT ME →"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "LET'S CONNECT!",
+    "intro": "For inquiries, collaborations, or just a hello —\nfeel free to reach out.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "SEND MESSAGE",
+    "sending": "SENDING...",
+    "thanks": "THANK YOU ✓",
+    "fillAll": "PLEASE FILL ALL FIELDS"
+  },
+  "footer": {
+    "copyright": "© 2026 Furi. All Rights Reserved."
+  },
+  "modal": {
+    "close": "Close",
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "lang": {
+    "label": "Language",
+    "ja": "日本語",
+    "en": "English"
+  }
+}

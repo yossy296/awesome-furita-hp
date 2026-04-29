@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <g transform="translate(64 0) scale(-1 1) rotate(-30 32 32)">
+    <path
+      d="M56 8 L8 28 L26 36 L32 56 L40 37 L56 8 Z"
+      fill="#DCFF1E"
+      stroke="#0E1116"
+      stroke-width="2.2"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M56 8 L26 36 L32 56"
+      fill="none"
+      stroke="#0E1116"
+      stroke-width="2"
+      stroke-linejoin="round"
+      stroke-linecap="round"
+    />
+  </g>
+</svg>
