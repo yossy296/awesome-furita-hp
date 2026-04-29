@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { headers as getHeaders } from "next/headers";
 import { getPayload } from "payload";
 import config from "@payload-config";
 
@@ -71,6 +72,21 @@ async function getCounts() {
   }
 }
 
+async function getCurrentUserName(): Promise<string> {
+  try {
+    const payload = await getPayload({ config });
+    const headers = await getHeaders();
+    const { user } = await payload.auth({ headers });
+    if (!user) return "Furi Admin";
+    const u = user as { name?: string | null; email?: string | null };
+    if (u.name && u.name.trim()) return u.name;
+    if (u.email) return u.email.split("@")[0];
+    return "Furi Admin";
+  } catch {
+    return "Furi Admin";
+  }
+}
+
 async function getLatestPosts() {
   try {
     const payload = await getPayload({ config });
@@ -86,19 +102,22 @@ async function getLatestPosts() {
 }
 
 export default async function Dashboard() {
-  const [counts, latest] = await Promise.all([getCounts(), getLatestPosts()]);
+  const [counts, latest, userName] = await Promise.all([
+    getCounts(),
+    getLatestPosts(),
+    getCurrentUserName(),
+  ]);
 
   return (
     <div className="furi-admin">
       <header className="furi-admin__hero">
         <div>
           <p className="furi-admin__eyebrow">Welcome back</p>
-          <h1 className="furi-admin__title">Furi Admin</h1>
+          <h1 className="furi-admin__title">{userName}</h1>
           <p className="furi-admin__sub">
             ブログ・旅路・パートナーをここから管理。サイトに反映するには下書き → 公開ステータスを変更してください。
           </p>
         </div>
-        <div className="furi-admin__brand">Furi</div>
       </header>
 
       <section className="furi-admin__grid">
@@ -109,7 +128,6 @@ export default async function Dashboard() {
             className="furi-card"
             style={{ ["--accent" as any]: it.color }}
           >
-            <div className="furi-card__icon">{it.icon}</div>
             <div className="furi-card__body">
               <h3>{it.label}</h3>
               <p>{it.desc}</p>

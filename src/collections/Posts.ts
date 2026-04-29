@@ -12,9 +12,13 @@ export const Posts: CollectionConfig = {
   labels: { singular: "ブログ記事", plural: "ブログ記事" },
   admin: {
     useAsTitle: "title",
-    defaultColumns: ["title", "publishedAt", "status"],
+    defaultColumns: ["title", "heroImage", "publishedAt", "status"],
     components: {
       Description: "@/components/payload/LocaleSwitcher",
+      beforeListTable: [
+        "@/components/payload/PostsListExtras",
+        "@/components/payload/PostsCardGrid",
+      ],
     },
   },
   hooks: {
@@ -47,6 +51,11 @@ export const Posts: CollectionConfig = {
       label: "サムネイル",
       type: "upload",
       relationTo: "media",
+      admin: {
+        components: {
+          Cell: "@/components/payload/HeroImageCell",
+        },
+      },
     },
     {
       name: "bodyJson",

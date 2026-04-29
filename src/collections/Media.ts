@@ -12,6 +12,11 @@ export const Media: CollectionConfig = {
     staticDir: path.resolve(dirname, "../../public/media"),
     mimeTypes: ["image/*"],
   },
-  admin: { useAsTitle: "alt" },
+  admin: {
+    useAsTitle: "alt",
+    components: {
+      beforeListTable: ["@/components/payload/MediaCardGrid"],
+    },
+  },
   fields: [{ name: "alt", label: "代替テキスト", type: "text", required: true }],
 };

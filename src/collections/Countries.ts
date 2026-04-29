@@ -11,6 +11,10 @@ export const Countries: CollectionConfig = {
     defaultColumns: ["order", "name", "country", "publishedAt"],
     components: {
       Description: "@/components/payload/LocaleSwitcher",
+      beforeListTable: [
+        "@/components/payload/CountriesListExtras",
+        "@/components/payload/CountriesCardGrid",
+      ],
     },
   },
   endpoints: [

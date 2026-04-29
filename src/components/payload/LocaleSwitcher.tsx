@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "@payloadcms/ui";
 
 const locales = [
-  { code: "ja", label: "JA — 日本語" },
-  { code: "en", label: "EN — English" },
+  { code: "ja", label: "JA" },
+  { code: "en", label: "EN" },
 ];
 
 export default function LocaleSwitcher() {
@@ -15,26 +16,43 @@ export default function LocaleSwitcher() {
   const params = useSearchParams();
   const current = params.get("locale") || "ja";
 
-  // useForm exists when inside a document edit context. Wrap in try/catch via
-  // optional access, since this component might also render outside a form.
+  // useForm exists when inside a document edit context.
   let formCtx: any = null;
   try {
     formCtx = useForm();
   } catch {}
 
   const [busy, setBusy] = useState(false);
+  const [panel, setPanel] = useState<HTMLElement | null>(null);
+
+  // Find the form panel on mount and re-attach if it remounts
+  useEffect(() => {
+    const findPanel = () =>
+      document.querySelector<HTMLElement>(
+        ".collection-edit__main, .document-fields, .render-fields"
+      );
+    let attempts = 0;
+    const tryAttach = () => {
+      const el = findPanel();
+      if (el) {
+        setPanel(el);
+        return;
+      }
+      if (attempts++ < 30) {
+        setTimeout(tryAttach, 80);
+      }
+    };
+    tryAttach();
+  }, [pathname]);
 
   const switchTo = async (code: string) => {
     if (code === current || busy) return;
     setBusy(true);
     try {
-      // Save current locale's data first to preserve unsaved input.
       if (formCtx?.submit) {
         try {
           await formCtx.submit({ skipValidation: true });
-        } catch {
-          // ignore save errors and continue switching
-        }
+        } catch {}
       }
       const next = new URLSearchParams(params.toString());
       next.set("locale", code);
@@ -44,9 +62,9 @@ export default function LocaleSwitcher() {
     }
   };
 
-  return (
+  const node = (
     <div className="furi-loc-switch">
-      <span className="furi-loc-switch__label">記事の言語</span>
+      <span className="furi-loc-switch__label">言語</span>
       <div className="furi-loc-switch__btns">
         {locales.map((l) => (
           <button
@@ -56,10 +74,13 @@ export default function LocaleSwitcher() {
             onClick={() => switchTo(l.code)}
             className={`furi-loc-switch__btn ${current === l.code ? "active" : ""}`}
           >
-            {busy && current !== l.code ? "保存中..." : l.label}
+            {busy && current !== l.code ? "..." : l.label}
           </button>
         ))}
       </div>
     </div>
   );
+
+  if (!panel) return null;
+  return createPortal(node, panel);
 }
