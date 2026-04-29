@@ -8,21 +8,13 @@ export const Partners: CollectionConfig = {
   },
   admin: {
     useAsTitle: "name",
-    defaultColumns: ["order", "name", "tag", "url"],
+    defaultColumns: ["name", "tag", "url"],
     components: {
       Description: "@/components/payload/LocaleSwitcher",
     },
   },
-  defaultSort: "order",
+  defaultSort: "-createdAt",
   fields: [
-    {
-      name: "order",
-      label: "並び順",
-      type: "number",
-      required: true,
-      defaultValue: 0,
-      admin: { position: "sidebar" },
-    },
     {
       name: "name",
       label: "パートナー名",
@@ -53,17 +45,6 @@ export const Partners: CollectionConfig = {
       label: "サムネイル画像",
       type: "upload",
       relationTo: "media",
-    },
-    {
-      name: "gallery",
-      label: "ギャラリー画像 (複数)",
-      type: "array",
-      admin: {
-        description: "モーダルのサムネイルストリップに表示する画像。",
-      },
-      fields: [
-        { name: "image", type: "upload", relationTo: "media", required: true },
-      ],
     },
   ],
 };

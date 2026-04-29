@@ -53,6 +53,17 @@ const cardsBase = [
       </svg>
     ),
   },
+  {
+    color: "lime",
+    titleKey: "what.card5Title",
+    descKey: "what.card5Desc",
+    icon: (
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M24 6 A18 18 0 1 0 24 42 A18 18 0 1 0 24 6 Z" />
+        <path d="M16 24 L22 30 L34 18" />
+      </svg>
+    ),
+  },
 ];
 
 const fadeUp = {

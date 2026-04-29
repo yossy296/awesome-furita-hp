@@ -458,24 +458,7 @@ body[data-theme="light"] {
   color: var(--furi-ink) !important;
   transition: background 180ms, color 180ms, transform 180ms !important;
 }
-.nav__link::before {
-  content: "•";
-  width: 22px;
-  height: 22px;
-  border-radius: 8px;
-  background: var(--furi-paper-2);
-  display: grid;
-  place-items: center;
-  font-size: 14px;
-  flex-shrink: 0;
-}
-.nav__link[href*="posts"]::before     { content: "✍️"; }
-.nav__link[href*="categories"]::before { content: "🏷"; }
-.nav__link[href*="countries"]::before { content: "🗺"; }
-.nav__link[href*="partners"]::before  { content: "🤝"; }
-.nav__link[href*="media"]::before     { content: "🖼"; }
-.nav__link[href*="contacts"]::before  { content: "📨"; }
-.nav__link[href*="users"]::before     { content: "👤"; }
+.nav__link::before { content: none !important; }
 .nav__link:hover {
   background: var(--furi-paper-2) !important;
   transform: translateX(2px);
@@ -483,10 +466,6 @@ body[data-theme="light"] {
 .nav__link.active {
   background: var(--furi-ink) !important;
   color: var(--furi-paper) !important;
-}
-.nav__link.active::before {
-  background: var(--furi-lime);
-  color: var(--furi-ink);
 }
 
 /* === Collection list page === */

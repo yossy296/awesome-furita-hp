@@ -252,21 +252,11 @@ export interface Country {
  */
 export interface Partner {
   id: number;
-  order: number;
   name: string;
   tag: string;
   url?: string | null;
   description?: string | null;
   image?: (number | null) | Media;
-  /**
-   * モーダルのサムネイルストリップに表示する画像。
-   */
-  gallery?:
-    | {
-        image: number | Media;
-        id?: string | null;
-      }[]
-    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -476,18 +466,11 @@ export interface CountriesSelect<T extends boolean = true> {
  * via the `definition` "partners_select".
  */
 export interface PartnersSelect<T extends boolean = true> {
-  order?: T;
   name?: T;
   tag?: T;
   url?: T;
   description?: T;
   image?: T;
-  gallery?:
-    | T
-    | {
-        image?: T;
-        id?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
 }

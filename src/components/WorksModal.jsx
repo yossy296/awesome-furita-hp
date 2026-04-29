@@ -17,7 +17,7 @@ export default function WorksModal({ open, item, allCards = [], activeIndex = 0,
     if (galleryLen <= 1) return;
     const id = setInterval(() => {
       setPhotoIdx((idx) => (idx + 1) % galleryLen);
-    }, 3500);
+    }, 12000);
     return () => clearInterval(id);
   }, [open, item, activeIndex]);
 
@@ -74,10 +74,10 @@ export default function WorksModal({ open, item, allCards = [], activeIndex = 0,
                     key={`${item.name}-${photoIdx}`}
                     src={heroImg}
                     alt=""
-                    initial={{ opacity: 0, x: 24 }}
+                    initial={{ opacity: 0, x: 60 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -24 }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    exit={{ opacity: 0, x: -60 }}
+                    transition={{ duration: 2.2, ease: [0.22, 1, 0.36, 1] }}
                     style={{
                       position: "absolute",
                       inset: 0,

@@ -1,11 +1,10 @@
 "use client";
 
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion } from "motion/react";
 import SplitText from "./SplitText.jsx";
 import BlobImage from "./BlobImage.jsx";
-import WorksModal from "./WorksModal.jsx";
 import { useT } from "@/i18n/I18nProvider";
 
 const fallback = [
@@ -67,7 +66,6 @@ export default function Works({ partners }) {
   const { t } = useT();
   const works = partners && partners.length > 0 ? partners.map(mapDoc) : fallback;
   const trackRef = useRef(null);
-  const [activeIdx, setActiveIdx] = useState(-1);
 
   const stepX = () => {
     const track = trackRef.current;
@@ -139,17 +137,17 @@ export default function Works({ partners }) {
           variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
         >
           {works.map((w, i) => (
-            <motion.button
+            <motion.a
               key={w.name}
-              type="button"
               className="work"
-              onClick={() => setActiveIdx(i)}
+              href={w.href}
+              target="_blank"
+              rel="noopener"
               variants={{
                 hidden: { opacity: 0, y: 40 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
               }}
               whileHover={{ y: -6 }}
-              style={{ background: "transparent", border: 0, padding: 0, textAlign: "left" }}
             >
               <motion.div
                 className="work__thumb work__thumb--blob"
@@ -161,19 +159,10 @@ export default function Works({ partners }) {
               <p className="work__name">{w.name}</p>
               <p className="work__tag">{w.tag}</p>
               <span className="work__more">{t("works.viewMore")}</span>
-            </motion.button>
+            </motion.a>
           ))}
         </motion.div>
       </div>
-
-      <WorksModal
-        open={activeIdx >= 0}
-        item={activeIdx >= 0 ? works[activeIdx] : null}
-        allCards={works}
-        activeIndex={activeIdx}
-        onClose={() => setActiveIdx(-1)}
-        onSelect={(i) => setActiveIdx(i)}
-      />
     </section>
   );
 }

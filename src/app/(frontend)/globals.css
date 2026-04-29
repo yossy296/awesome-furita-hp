@@ -341,8 +341,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .what__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .what__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .what__grid { grid-template-columns: 1fr; }
 }
 .what__card {
   background: var(--paper);
