@@ -6,7 +6,6 @@ import { getLocale } from "@/i18n/getLocale";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import FluidCursor from "@/components/FluidCursor";
 import CursorTrail from "@/components/CursorTrail";
 import CustomCursor from "@/components/CustomCursor";
 import BlogHero from "@/components/blog/BlogHero";
@@ -33,7 +32,6 @@ export default async function BlogIndex() {
 
   return (
     <>
-      <FluidCursor />
       <FluidCursor />
       <CursorTrail />
       <CustomCursor />

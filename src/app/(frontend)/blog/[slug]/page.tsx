@@ -7,7 +7,6 @@ import { getLocale } from "@/i18n/getLocale";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import FluidCursor from "@/components/FluidCursor";
 import CursorTrail from "@/components/CursorTrail";
 import CustomCursor from "@/components/CustomCursor";
 import BlogReader from "@/components/blog/BlogReader";
@@ -95,7 +94,6 @@ export default async function PostDetail({ params }: { params: Promise<{ slug: s
 
   return (
     <>
-      <FluidCursor />
       <CursorTrail />
       <CustomCursor />
       <SmoothScroll />
