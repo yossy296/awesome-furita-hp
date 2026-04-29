@@ -22,6 +22,8 @@ const COLORS = {
   pink: 6, purple: 7, slate: 8, amber: 9, white: 10, lime: 11,
 };
 
+const round2 = (n) => Math.round(n * 100) / 100;
+
 function squirclePath(w, h, r, x, y) {
   let p = "";
   for (let j = 0; j < 4; j++) {
@@ -29,11 +31,11 @@ function squirclePath(w, h, r, x, y) {
       const q = ((j + i / 30) * Math.PI) / 2;
       const c = Math.cos(q);
       const s = Math.sin(q);
-      p +=
-        (j || i ? "L" : "M") +
-        (x + (c > 0 ? w - r : r) + Math.sign(c) * Math.pow(Math.abs(c), 0.6) * r) +
-        " " +
-        (y + (s > 0 ? h - r : r) + Math.sign(s) * Math.pow(Math.abs(s), 0.6) * r);
+      const px =
+        x + (c > 0 ? w - r : r) + Math.sign(c) * Math.pow(Math.abs(c), 0.6) * r;
+      const py =
+        y + (s > 0 ? h - r : r) + Math.sign(s) * Math.pow(Math.abs(s), 0.6) * r;
+      p += (j || i ? "L" : "M") + round2(px) + " " + round2(py);
     }
   }
   return p + "Z";
@@ -67,7 +69,16 @@ export default function SquircleButton({
   const wrapRef = useRef(null);
   const textRef = useRef(null);
   const [pressedState, setPressed] = useState(0);
-  const pressed = pressedProp != null ? (pressedProp ? 1 : 0) : pressedState;
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  const pressed =
+    mounted && pressedProp != null
+      ? pressedProp
+        ? 1
+        : 0
+      : pressedState;
   const [innerW, setInnerW] = useState(
     sq ? 40 : width != null ? width : 360,
   );

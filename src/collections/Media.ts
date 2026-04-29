@@ -12,6 +12,9 @@ export const Media: CollectionConfig = {
     staticDir: path.resolve(dirname, "../../public/media"),
     mimeTypes: ["image/*"],
   },
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: "alt",
     components: {

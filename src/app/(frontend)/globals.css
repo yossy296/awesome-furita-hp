@@ -26,6 +26,46 @@
 html, body { margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
+/* === Custom page scrollbar (jScrollPane vibe, site accent colors) === */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--lime) var(--paper-2);
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: var(--paper-2);
+  border-radius: 999px;
+  margin: 6px 0;
+}
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ECFF6E 0%, var(--lime) 100%);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  min-height: 40px;
+  box-shadow: 0 1px 2px rgba(184, 218, 0, 0.4);
+}
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #BEF7F4 0%, var(--cyan) 100%);
+  background-clip: padding-box;
+}
+html::-webkit-scrollbar-thumb:active,
+body::-webkit-scrollbar-thumb:active {
+  background: var(--lime-deep);
+  background-clip: padding-box;
+}
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 body {
   font-family: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   background: var(--paper);
