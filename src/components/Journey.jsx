@@ -1,7 +1,7 @@
 "use client";
 
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import SplitText from "./SplitText.jsx";
 import JourneyModal from "./JourneyModal.jsx";
@@ -37,6 +37,24 @@ export default function Journey({ countries }) {
   const cards = countries && countries.length > 0 ? countries.map(mapDoc) : fallback;
   const trackRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(-1);
+  const [countryCount, setCountryCount] = useState(cards.length);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/countries/count")
+      .then((r) => r.json())
+      .then((d) => {
+        if (!cancelled && typeof d?.count === "number" && d.count > 0) {
+          setCountryCount(d.count);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const title = (t("journey.title") || "").replace("{count}", String(countryCount));
 
   const stepX = () => {
     const track = trackRef.current;
@@ -64,8 +82,8 @@ export default function Journey({ countries }) {
         >
           <div className="journey__title-wrap">
             <span className="eyebrow">{t("journey.eyebrow")}</span>
-            <SplitText as="h2" className="jp-h" variant="rise" charDelay={28}>
-              {t("journey.title")}
+            <SplitText as="h2" className="jp-h" variant="rise" charDelay={28} key={title}>
+              {title}
             </SplitText>
           </div>
           <motion.img

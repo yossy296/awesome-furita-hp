@@ -1,5 +1,12 @@
 import type { CollectionConfig } from "payload";
 
+function genSlug() {
+  if (typeof globalThis.crypto !== "undefined" && typeof globalThis.crypto.randomUUID === "function") {
+    return `post-${globalThis.crypto.randomUUID()}`;
+  }
+  return `post-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 export const Posts: CollectionConfig = {
   slug: "posts",
   labels: { singular: "ブログ記事", plural: "ブログ記事" },
@@ -10,15 +17,24 @@ export const Posts: CollectionConfig = {
       Description: "@/components/payload/LocaleSwitcher",
     },
   },
+  hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        if (data && !data.slug) {
+          data.slug = genSlug();
+        }
+        return data;
+      },
+    ],
+  },
   fields: [
     { name: "title", label: "タイトル", type: "text", required: true, localized: true },
     {
       name: "slug",
-      label: "スラッグ",
       type: "text",
       required: true,
       unique: true,
-      admin: { position: "sidebar" },
+      admin: { hidden: true },
     },
     {
       name: "excerpt",

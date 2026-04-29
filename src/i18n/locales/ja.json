@@ -50,7 +50,7 @@
   },
   "journey": {
     "eyebrow": "My Journey",
-    "title": "32カ国の旅路",
+    "title": "{count}カ国の旅路",
     "modalCta": "VIEW FULL JOURNEY"
   },
   "works": {

@@ -1326,7 +1326,17 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .jcard__sub   { font-family: "Noto Sans JP", sans-serif; font-weight: 700; font-size: 14px; margin: 0 0 18px; color: var(--ink); }
 .jcard__tags  { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
 .jcard__tags span { font-size: 11px; color: var(--ink-2); border: 1px solid var(--line); padding: 5px 14px; border-radius: 999px; }
-.jcard__copy  { font-size: 13px; line-height: 2.05; color: var(--ink); margin: 0 0 28px; }
+.jcard__copy  {
+  font-size: 13px; line-height: 2.05; color: var(--ink); margin: 0 0 28px;
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-3) transparent;
+}
+.jcard__copy::-webkit-scrollbar { width: 6px; }
+.jcard__copy::-webkit-scrollbar-thumb { background: var(--ink-3); border-radius: 999px; }
+.jcard__copy::-webkit-scrollbar-track { background: transparent; }
 .jcard__cta {
   display: inline-flex; align-items: center; gap: 12px;
   padding: 14px 30px;
@@ -1562,4 +1572,70 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   color: var(--ink-3);
   margin: 6px 0 0;
   padding: 8px 0;
+}
+
+/* Plain (no blob mask) variants in modal */
+.jcard__photo--plain {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--paper-2);
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  margin-top: 80px;
+}
+.jcard__photo--plain img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+}
+@media (max-width: 860px) {
+  .jcard__photo--plain { aspect-ratio: 16 / 10; }
+}
+.jcard__thumb--plain {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Home cards: fixed text regions with ellipsis when overflowing */
+.j-card__name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  min-height: calc(1em * 1.4 * 2);
+}
+.j-card__desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  min-height: calc(1em * 1.7 * 3);
+}
+.work__name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  min-height: calc(1em * 1.4 * 2);
+}
+.work__tag {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  min-height: calc(1em * 1.5 * 2);
 }

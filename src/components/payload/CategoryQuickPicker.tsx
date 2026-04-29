@@ -3,18 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useField } from "@payloadcms/ui";
 
-type Category = { id: string; name: string };
-
-function slugify(s: string) {
-  const base = s
-    .toLowerCase()
-    .normalize("NFKD")
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-+|-+$/g, "");
-  return base || `cat-${Date.now()}`;
-}
+type Category = { id: string | number; name: string };
 
 export default function CategoryQuickPicker({
   path,
@@ -23,7 +12,7 @@ export default function CategoryQuickPicker({
   path: string;
   field?: { label?: string; admin?: { description?: string } };
 }) {
-  const { value, setValue } = useField<string | null>({ path });
+  const { value, setValue } = useField<string | number | null>({ path });
   const [items, setItems] = useState<Category[]>([]);
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
@@ -37,7 +26,7 @@ export default function CategoryQuickPicker({
       const data = await r.json();
       setItems(
         (data.docs || []).map((d: any) => ({
-          id: String(d.id),
+          id: d.id,
           name: d.name || "(無題)",
         }))
       );
@@ -60,7 +49,7 @@ export default function CategoryQuickPicker({
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
 
-  const selected = items.find((it) => it.id === String(value));
+  const selected = items.find((it) => String(it.id) === String(value));
   const inputValue = open ? query : selected?.name || query;
 
   const filtered = useMemo(() => {
@@ -83,14 +72,14 @@ export default function CategoryQuickPicker({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ name, slug: slugify(name) }),
+        body: JSON.stringify({ name }),
       });
       const data = await r.json();
       const created = data.doc || data;
-      if (created?.id) {
-        const newItem: Category = { id: String(created.id), name };
+      if (created?.id != null) {
+        const newItem: Category = { id: created.id, name };
         setItems((prev) => [newItem, ...prev]);
-        setValue(newItem.id);
+        setValue(created.id);
         setQuery("");
         setOpen(false);
       }
@@ -101,7 +90,7 @@ export default function CategoryQuickPicker({
     }
   };
 
-  const choose = (id: string, name: string) => {
+  const choose = (id: string | number, _name: string) => {
     setValue(id);
     setQuery("");
     setOpen(false);

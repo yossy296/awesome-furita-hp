@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import BlobImage from "./BlobImage.jsx";
 
 export default function WorksModal({ open, item, allCards = [], activeIndex = 0, onClose, onSelect }) {
   const [photoIdx, setPhotoIdx] = useState(0);
@@ -10,6 +9,17 @@ export default function WorksModal({ open, item, allCards = [], activeIndex = 0,
   useEffect(() => {
     setPhotoIdx(0);
   }, [activeIndex]);
+
+  // Auto-advance gallery every 3.5s while modal is open
+  useEffect(() => {
+    if (!open || !item) return;
+    const galleryLen = (item.gallery?.length || 1);
+    if (galleryLen <= 1) return;
+    const id = setInterval(() => {
+      setPhotoIdx((idx) => (idx + 1) % galleryLen);
+    }, 3500);
+    return () => clearInterval(id);
+  }, [open, item, activeIndex]);
 
   useEffect(() => {
     if (!open) return;
@@ -20,9 +30,12 @@ export default function WorksModal({ open, item, allCards = [], activeIndex = 0,
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    const lenis = /** @type {any} */ (window).__lenis;
+    if (lenis && typeof lenis.stop === "function") lenis.stop();
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      if (lenis && typeof lenis.start === "function") lenis.start();
     };
   }, [open, onClose, onSelect, activeIndex, allCards.length]);
 
@@ -55,20 +68,27 @@ export default function WorksModal({ open, item, allCards = [], activeIndex = 0,
             </button>
 
             <div className="jcard__media">
-              <motion.div
-                key={`${item.name}-${photoIdx}`}
-                className="jcard__photo jcard__photo--blob"
-                initial={{ opacity: 0, scale: 1.02 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4 }}
-              >
-                <BlobImage
-                  src={heroImg}
-                  seed={900 + activeIndex * 23 + photoIdx}
-                  count={5}
-                  duration={6}
-                />
-              </motion.div>
+              <div className="jcard__photo jcard__photo--plain" style={{ position: "relative" }}>
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={`${item.name}-${photoIdx}`}
+                    src={heroImg}
+                    alt=""
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -24 }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: 16,
+                    }}
+                  />
+                </AnimatePresence>
+              </div>
             </div>
 
             <div className="jcard__body">
@@ -76,7 +96,7 @@ export default function WorksModal({ open, item, allCards = [], activeIndex = 0,
               <h2 className="jcard__name">{item.name}</h2>
               <p className="jcard__sub">{item.tag}</p>
               {item.description && (
-                <p className="jcard__copy">
+                <p className="jcard__copy" data-lenis-prevent>
                   {item.description.split("\n").map((l, i, arr) => (
                     <span key={i}>
                       {l}
@@ -106,12 +126,11 @@ export default function WorksModal({ open, item, allCards = [], activeIndex = 0,
                 {gallery.map((g, i) => (
                   <button
                     key={i}
-                    className={`jcard__thumb jcard__thumb--blob ${i === photoIdx ? "active" : ""}`}
+                    className={`jcard__thumb jcard__thumb--plain ${i === photoIdx ? "active" : ""}`}
                     onClick={() => setPhotoIdx(i)}
+                    style={{ backgroundImage: `url('${g}')` }}
                     aria-label={`画像 ${i + 1}`}
-                  >
-                    <BlobImage src={g} seed={950 + i * 7} count={4} duration={7} />
-                  </button>
+                  />
                 ))}
               </div>
               <button

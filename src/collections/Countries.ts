@@ -13,6 +13,20 @@ export const Countries: CollectionConfig = {
       Description: "@/components/payload/LocaleSwitcher",
     },
   },
+  endpoints: [
+    {
+      path: "/count",
+      method: "get",
+      handler: async (req) => {
+        try {
+          const result = await req.payload.count({ collection: "countries" });
+          return Response.json({ count: result.totalDocs });
+        } catch {
+          return Response.json({ count: 0 });
+        }
+      },
+    },
+  ],
   defaultSort: "order",
   fields: [
     {

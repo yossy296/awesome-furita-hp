@@ -50,7 +50,7 @@
   },
   "journey": {
     "eyebrow": "My Journey",
-    "title": "32 Countries.",
+    "title": "{count} Countries.",
     "modalCta": "VIEW FULL JOURNEY"
   },
   "works": {
