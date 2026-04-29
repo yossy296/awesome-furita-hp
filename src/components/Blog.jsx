@@ -16,7 +16,7 @@ function fmtDate(d) {
 export default function Blog({ posts = [] }) {
   const { t } = useT();
   const trackRef = useRef(null);
-  if (!posts || posts.length === 0) return null;
+  const hasPosts = posts && posts.length > 0;
 
   const stepX = () => {
     const track = trackRef.current;
@@ -56,6 +56,7 @@ export default function Blog({ posts = [] }) {
           <Link href="/blog" className="more">
             {t("blog.viewAll")}
           </Link>
+          {hasPosts && (
           <div className="row-nav" role="group" aria-label="Blog navigation">
             <motion.button
               className="row-nav__btn"
@@ -80,8 +81,26 @@ export default function Blog({ posts = [] }) {
               </svg>
             </motion.button>
           </div>
+          )}
         </motion.div>
 
+        {!hasPosts ? (
+          <div
+            style={{
+              gridColumn: 1,
+              gridRow: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              minHeight: 160,
+              color: "var(--ink-2)",
+              fontSize: 14,
+              letterSpacing: "0.04em",
+            }}
+          >
+            記事はありません
+          </div>
+        ) : (
         <motion.div
           className="works__grid"
           ref={trackRef}
@@ -116,6 +135,7 @@ export default function Blog({ posts = [] }) {
             </motion.div>
           ))}
         </motion.div>
+        )}
       </div>
     </section>
   );

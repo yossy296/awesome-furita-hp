@@ -11,6 +11,13 @@ const items = [
     desc: "記事の作成・公開・タグ管理",
   },
   {
+    slug: "categories",
+    label: "カテゴリ",
+    icon: "🏷",
+    color: "#B8DA00",
+    desc: "ブログ記事のカテゴリ分け",
+  },
+  {
     slug: "countries",
     label: "旅路 (Journey)",
     icon: "🗺",

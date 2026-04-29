@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { getLocale } from "@/i18n/getLocale";
+import { getCategoriesWithCounts } from "@/lib/getCategories";
 
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -29,10 +29,10 @@ export default async function BlogIndex() {
     .catch(() => ({ docs: [] }));
 
   const popular = docs.slice(0, 3);
+  const categories = await getCategoriesWithCounts(locale);
 
   return (
     <>
-      <FluidCursor />
       <CursorTrail />
       <CustomCursor />
       <SmoothScroll />
@@ -44,12 +44,7 @@ export default async function BlogIndex() {
         <section className="blog-grid">
           <div className="posts">
             {docs.length === 0 ? (
-              <p style={{ color: "var(--ink-2)" }}>
-                まだ公開された記事がありません。{" "}
-                <Link href="/admin/collections/posts/create" style={{ textDecoration: "underline" }}>
-                  管理画面から作成 →
-                </Link>
-              </p>
+              <p style={{ color: "var(--ink-2)" }}>記事はありません</p>
             ) : (
               docs.map((p: any, i: number) => (
                 <BlogPostItem key={p.id} post={p} isNew={i === 0} />
@@ -57,7 +52,7 @@ export default async function BlogIndex() {
             )}
           </div>
 
-          <BlogSidebar popular={popular} totalPosts={docs.length} />
+          <BlogSidebar popular={popular} totalPosts={docs.length} categories={categories} />
         </section>
       </main>
 

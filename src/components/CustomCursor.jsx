@@ -60,7 +60,7 @@ export default function CustomCursor() {
         transition: "opacity 0.2s",
       }}
       animate={{
-        scale: hovering ? 1.8 : 1,
+        scale: hovering ? 1.25 : 1,
         rotate: hovering ? -6 : 0,
       }}
       transition={{ type: "spring", stiffness: 320, damping: 18 }}

@@ -52,6 +52,20 @@ export const Posts: CollectionConfig = {
       fields: [{ name: "label", type: "text", required: true }],
     },
     {
+      name: "category",
+      label: "カテゴリ",
+      type: "relationship",
+      relationTo: "categories",
+      hasMany: false,
+      admin: {
+        position: "sidebar",
+        description: "既存カテゴリから選択、または「+ 新規登録」で即座に追加できます。",
+        components: {
+          Field: "@/components/payload/CategoryQuickPicker",
+        },
+      },
+    },
+    {
       name: "status",
       label: "ステータス",
       type: "select",

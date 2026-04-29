@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     posts: Post;
+    categories: Category;
     countries: Country;
     partners: Partner;
     contacts: Contact;
@@ -83,6 +84,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     countries: CountriesSelect<false> | CountriesSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
     contacts: ContactsSelect<false> | ContactsSelect<true>;
@@ -199,8 +201,23 @@ export interface Post {
         id?: string | null;
       }[]
     | null;
+  /**
+   * 既存カテゴリから選択、または「+ 新規登録」で即座に追加できます。
+   */
+  category?: (number | null) | Category;
   status?: ('draft' | 'published') | null;
   publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  name: string;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -300,6 +317,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
       } | null)
     | ({
         relationTo: 'countries';
@@ -413,8 +434,19 @@ export interface PostsSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  category?: T;
   status?: T;
   publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }

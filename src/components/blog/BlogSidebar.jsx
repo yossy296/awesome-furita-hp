@@ -9,7 +9,7 @@ function fmtDate(d) {
   return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")}`;
 }
 
-export default function BlogSidebar({ popular = [], totalPosts = 0 }) {
+export default function BlogSidebar({ popular = [], totalPosts = 0, categories = [] }) {
   return (
     <aside className="side">
       <form className="search" role="search" onSubmit={(e) => e.preventDefault()}>
@@ -24,26 +24,24 @@ export default function BlogSidebar({ popular = [], totalPosts = 0 }) {
 
       <section className="side__block">
         <h3 className="side__title">Categories</h3>
-        <ul className="cats">
-          {[
-            { l: "旅行", n: totalPosts },
-            { l: "デザイン", n: 0 },
-            { l: "ライフスタイル", n: 0 },
-            { l: "インスピレーション", n: 0 },
-            { l: "お知らせ", n: 0 },
-          ].map((c) => (
-            <li key={c.l}>
-              <a href="#">
-                <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 7l9-4 9 4-9 4-9-4z" />
-                  <path d="M3 12l9 4 9-4M3 17l9 4 9-4" />
-                </svg>
-                <span>{c.l}</span>
-                <em>({c.n})</em>
-              </a>
-            </li>
-          ))}
-        </ul>
+        {categories.length > 0 ? (
+          <ul className="cats">
+            {categories.map((c) => (
+              <li key={c.id}>
+                <Link href={`/blog?category=${encodeURIComponent(c.slug || c.id)}`}>
+                  <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 7l9-4 9 4-9 4-9-4z" />
+                    <path d="M3 12l9 4 9-4M3 17l9 4 9-4" />
+                  </svg>
+                  <span>{c.name}</span>
+                  <em>({c.count})</em>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="side__empty">カテゴリーはありません</p>
+        )}
       </section>
 
       <section className="side__block">

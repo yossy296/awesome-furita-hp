@@ -8,6 +8,7 @@ import { ja } from "@payloadcms/translations/languages/ja";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Posts } from "./collections/Posts";
+import { Categories } from "./collections/Categories";
 import { Countries } from "./collections/Countries";
 import { Partners } from "./collections/Partners";
 import { Contacts } from "./collections/Contacts";
@@ -33,7 +34,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Users, Media, Posts, Countries, Partners, Contacts],
+  collections: [Users, Media, Posts, Categories, Countries, Partners, Contacts],
   localization: {
     locales: [
       { label: "日本語", code: "ja" },
