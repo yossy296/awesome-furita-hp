@@ -188,6 +188,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   letter-spacing: -0.04em;
   color: var(--ink);
   margin: 0;
+  text-shadow:
+    1px 1px 0 var(--lime),
+    2px 2px 0 var(--lime),
+    3px 3px 0 var(--lime),
+    4px 4px 0 var(--lime),
+    5px 5px 0 var(--lime-deep),
+    6px 6px 0 var(--lime-deep),
+    7px 7px 0 var(--lime-deep),
+    8px 8px 0 var(--lime-deep),
+    10px 12px 24px rgba(14, 17, 22, 0.18);
 }
 .hero__title .row { display: block; }
 .hero__title .become {
