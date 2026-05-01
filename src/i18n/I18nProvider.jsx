@@ -22,7 +22,8 @@ export function I18nProvider({ children, initialLocale = "ja" }) {
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
+      if (typeof window === "undefined") return;
+      const saved = window.localStorage?.getItem?.(STORAGE_KEY);
       if (saved && dictionaries[saved]) setLocaleState(saved);
     } catch {}
   }, []);
@@ -39,7 +40,8 @@ export function I18nProvider({ children, initialLocale = "ja" }) {
     if (!dictionaries[l]) return;
     setLocaleState(l);
     try {
-      localStorage.setItem(STORAGE_KEY, l);
+      if (typeof window === "undefined") return;
+      window.localStorage?.setItem?.(STORAGE_KEY, l);
     } catch {}
   };
 

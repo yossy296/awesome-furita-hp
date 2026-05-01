@@ -4,10 +4,14 @@ out/
 dist/
 .env
 .env.local
-data/payload.db
-data/payload.db-journal
-data/payload.db-shm
-data/payload.db-wal
 public/media/
 .DS_Store
 *.log
+
+# Build / IDE artifacts
+tsconfig.tsbuildinfo
+
+# Local scratch / credentials files (never commit)
+credentials,txt
+credentials.txt
+*.secrets

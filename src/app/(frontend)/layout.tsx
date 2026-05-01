@@ -1,10 +1,68 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { I18nProvider } from "@/i18n/I18nProvider";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "ADHDバックパッカー Furi — 死ぬ時に後悔しない人生を",
-  description: "3度のうつ病・ADHD診断を経て32カ国を踏破。立ち止まる人の次の一歩を創るFuriのポートフォリオ。",
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: `${SITE.brandFull} — 死ぬ時に後悔しない人生を`,
+    template: `%s — ${SITE.brand}`,
+  },
+  description: SITE.description,
+  applicationName: SITE.brand,
+  authors: [{ name: SITE.brand }],
+  creator: SITE.brand,
+  publisher: SITE.brand,
+  alternates: {
+    canonical: "/",
+    languages: { ja: "/", en: "/" },
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE.brand,
+    title: `${SITE.brandFull} — 死ぬ時に後悔しない人生を`,
+    description: SITE.description,
+    url: SITE.url,
+    locale: SITE.locale,
+    alternateLocale: [SITE.alternateLocale],
+    images: [
+      {
+        url: SITE.defaultOgImage,
+        width: 1200,
+        height: 630,
+        alt: SITE.brandFull,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.brandFull} — 死ぬ時に後悔しない人生を`,
+    description: SITE.description,
+    images: [SITE.defaultOgImage],
+    creator: SITE.twitter,
+  },
+  icons: {
+    icon: [{ url: "/logo_150x150.png", sizes: "150x150" }],
+    apple: "/logo_150x150.png",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0E1014",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

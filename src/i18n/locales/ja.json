@@ -88,7 +88,8 @@
     "send": "SEND MESSAGE",
     "sending": "SENDING...",
     "thanks": "THANK YOU ✓",
-    "fillAll": "PLEASE FILL ALL FIELDS"
+    "fillAll": "PLEASE FILL ALL FIELDS",
+    "error": "送信に失敗しました"
   },
   "footer": {
     "copyright": "© 2026 Furi. All Rights Reserved."

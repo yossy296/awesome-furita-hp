@@ -5,7 +5,7 @@ export const Contacts: CollectionConfig = {
   labels: { singular: "お問い合わせ", plural: "お問い合わせ" },
   admin: {
     useAsTitle: "name",
-    defaultColumns: ["name", "email", "createdAt"],
+    defaultColumns: ["name", "email", "message", "createdAt"],
   },
   access: {
     create: ({ req }) => !req.user,

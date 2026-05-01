@@ -1,6 +1,8 @@
+import type { Person, WebSite, WithContext } from "schema-dts";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { getLocale } from "@/i18n/getLocale";
+import { SITE, absoluteUrl } from "@/lib/site";
 
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
@@ -16,6 +18,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import FluidCursor from "@/components/FluidCursor";
 import CursorTrail from "@/components/CursorTrail";
 import CustomCursor from "@/components/CustomCursor";
+import JsonLd from "@/components/JsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -35,8 +38,37 @@ export default async function Home() {
     }).catch(() => ({ docs: [] })),
   ]);
 
+  const websiteLd: WithContext<WebSite> = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE.brand,
+    alternateName: SITE.brandFull,
+    url: SITE.url,
+    description: SITE.description,
+    inLanguage: ["ja", "en"],
+  };
+
+  const personLd: WithContext<Person> = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: SITE.brand,
+    alternateName: SITE.legalName,
+    url: SITE.url,
+    image: absoluteUrl(SITE.defaultOgImage),
+    description: SITE.description,
+    jobTitle: "Backpacker / Coach / Founder",
+    knowsAbout: [
+      "ADHD",
+      "うつ病",
+      "海外バックパック",
+      "コーチング",
+      "起業",
+    ],
+  };
+
   return (
     <>
+      <JsonLd data={[websiteLd, personLd]} />
       <FluidCursor />
       <CursorTrail />
       <CustomCursor />

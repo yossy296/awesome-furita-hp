@@ -1,17 +1,18 @@
 import Link from "next/link";
 import { getPayload } from "payload";
 import config from "@payload-config";
+import { getExcerpt } from "@/lib/extractFirstImage";
 
 type Media = { url?: string | null; thumbnailURL?: string | null; alt?: string | null };
 type Category = { id: string | number; name?: string | null };
 type Post = {
   id: string | number;
   title?: string | null;
-  excerpt?: string | null;
   status?: "draft" | "published" | null;
   publishedAt?: string | null;
   heroImage?: Media | string | null;
   category?: Category | string | number | null;
+  bodyJson?: unknown;
 };
 
 function imageURL(image: Post["heroImage"]): string | null {
@@ -77,9 +78,10 @@ export default async function PostsCardGrid() {
                 </span>
                 <span className="adm-card__body">
                   <span className="adm-card__title">{d.title || "（無題）"}</span>
-                  {d.excerpt ? (
-                    <span className="adm-card__desc">{d.excerpt}</span>
-                  ) : null}
+                  {(() => {
+                    const ex = getExcerpt(d.bodyJson, 100);
+                    return ex ? <span className="adm-card__desc">{ex}</span> : null;
+                  })()}
                   <span className="adm-card__meta">
                     {cat ? <span>{cat}</span> : null}
                     {d.publishedAt ? (

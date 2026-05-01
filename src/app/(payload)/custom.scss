@@ -590,8 +590,9 @@ body[data-theme="light"] {
 }
 
 /* === Edit / Form pages === */
-.collection-edit__main,
-.document-fields {
+/* Card style applied to OUTER wrapper only — inner `.document-fields` stays
+   transparent to avoid the double-card nesting effect. */
+.collection-edit__main {
   background: var(--furi-paper);
   border: 1px solid var(--furi-line);
   border-radius: 18px;
@@ -1048,14 +1049,21 @@ textarea.field-input:focus,
   text-transform: none !important;
 }
 
-/* Form panels */
-.collection-edit__main,
-.document-fields {
+/* Form panels (outer wrapper only — keeps inner `.document-fields` transparent
+   so the form area renders as a single card, not nested cards). */
+.collection-edit__main {
   background: var(--adm-panel) !important;
   border: 1px solid var(--adm-line-1) !important;
   border-radius: var(--adm-radius) !important;
   box-shadow: var(--adm-shadow-card);
   padding: 24px 28px !important;
+}
+.document-fields {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 
 /* Sidebar fields card */

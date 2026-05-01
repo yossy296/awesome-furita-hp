@@ -160,14 +160,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   position: absolute;
   inset: 90px 36px 90px 36px;
   border-radius: 0 0 64% 36% / 0 0 18% 14%;
-  background: url("/hero.png") center/cover no-repeat;
+  background: url("/hero.jpg") center/cover no-repeat;
   /* the bottom edge is shaped via SVG mask below */
 }
 .hero__shape {
   position: absolute;
   inset: 90px 36px 0 36px;
   z-index: 1;
-  background: url("/hero.png") -600% 21% / 105% auto no-repeat;
+  background: url("/hero.jpg") 20% 60% / 100% auto no-repeat;
   -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 720' preserveAspectRatio='none'><path d='M0,0 L1200,0 L1200,640 C1050,690 920,640 760,668 C600,696 460,720 320,696 C190,672 80,710 0,690 Z' fill='black'/></svg>");
           mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 720' preserveAspectRatio='none'><path d='M0,0 L1200,0 L1200,640 C1050,690 920,640 760,668 C600,696 460,720 320,696 C190,672 80,710 0,690 Z' fill='black'/></svg>");
   -webkit-mask-size: 100% 100%;

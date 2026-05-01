@@ -19,7 +19,7 @@ export default function Contact() {
     setErrors((er) => ({ ...er, [k]: false }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (sending) return;
     const newErrs = {};
@@ -34,14 +34,23 @@ export default function Contact() {
     }
     setSending(true);
     setLabel(t("contact.sending"));
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("send_failed");
       setLabel(t("contact.thanks"));
       setForm({ name: "", email: "", message: "" });
+    } catch {
+      setLabel(t("contact.error") || t("contact.fillAll"));
+    } finally {
       setTimeout(() => {
         setLabel(t("contact.send"));
         setSending(false);
       }, 2400);
-    }, 800);
+    }
   };
 
   return (

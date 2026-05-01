@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import BlobImage from "../BlobImage.jsx";
+import { getExcerpt } from "@/lib/extractFirstImage";
 
 function fmtDate(d) {
   if (!d) return "";
@@ -13,6 +14,7 @@ function fmtDate(d) {
 export default function BlogPostItem({ post, isNew = false }) {
   const thumb = post.heroImage?.url || "/assets/photo/photo_mask_06.png";
   const tags = (post.tags || []).map((t) => t.label).filter(Boolean);
+  const excerpt = getExcerpt(post.bodyJson);
 
   return (
     <motion.div
@@ -30,7 +32,7 @@ export default function BlogPostItem({ post, isNew = false }) {
         <div className="post__body">
           <span className="post__date">{fmtDate(post.publishedAt)}</span>
           <h2 className="post__title">{post.title}</h2>
-          {post.excerpt && <p className="post__excerpt">{post.excerpt}</p>}
+          {excerpt && <p className="post__excerpt">{excerpt}</p>}
           {tags.length > 0 && (
             <div className="post__tags">
               {tags.map((t, i) => (

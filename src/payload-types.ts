@@ -181,7 +181,6 @@ export interface Post {
   id: number;
   title: string;
   slug: string;
-  excerpt?: string | null;
   heroImage?: (number | null) | Media;
   /**
    * ブロックエディタ（note風）で記事を書けます。右上の言語切替で別言語の本文を編集できます。
@@ -415,7 +414,6 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  excerpt?: T;
   heroImage?: T;
   bodyJson?: T;
   tags?:

@@ -32,6 +32,7 @@ export const Posts: CollectionConfig = {
     ],
   },
   fields: [
+    // === Main editing area: note-like minimal layout ===
     { name: "title", label: "タイトル", type: "text", required: true, localized: true },
     {
       name: "slug",
@@ -41,14 +42,8 @@ export const Posts: CollectionConfig = {
       admin: { hidden: true },
     },
     {
-      name: "excerpt",
-      label: "概要",
-      type: "textarea",
-      localized: true,
-    },
-    {
       name: "heroImage",
-      label: "サムネイル",
+      label: "ヘッダー画像",
       type: "upload",
       relationTo: "media",
       admin: {
@@ -69,6 +64,7 @@ export const Posts: CollectionConfig = {
         },
       },
     },
+    // 本文の直下にタグを配置（note風: 記事末尾にタグ）
     {
       name: "tags",
       label: "タグ",
@@ -76,6 +72,9 @@ export const Posts: CollectionConfig = {
       localized: true,
       fields: [{ name: "label", type: "text", required: true }],
     },
+
+    // === Sidebar: publish metadata only (note-like minimal sidebar) ===
+    // Note: 概要 (excerpt) は本文から自動生成されるため入力欄なし。
     {
       name: "category",
       label: "カテゴリ",
