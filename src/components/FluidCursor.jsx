@@ -9,6 +9,16 @@ export default function FluidCursor() {
   useEffect(() => {
     let cancelled = false;
 
+    // webgl-fluid has a multi-touch bug that throws on mobile, and the effect
+    // is purely a mouse-cursor decoration anyway — skip on touch / no-hover
+    // devices.
+    const isTouchOnly =
+      window.matchMedia?.("(hover: none), (pointer: coarse)").matches;
+    if (isTouchOnly) {
+      setHidden(true);
+      return;
+    }
+
     const setSize = () => {
       const c = canvasRef.current;
       if (!c) return;

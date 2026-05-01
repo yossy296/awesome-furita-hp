@@ -128,24 +128,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background: var(--ink); transition: width 200ms ease, left 200ms ease;
 }
 .nav__link:hover::after { width: 100%; left: 0; }
-.nav__menu {
-  width: 44px; height: 44px; border-radius: 999px;
-  background: var(--lime);
-  display: grid; place-items: center;
-  transition: transform 200ms ease;
-}
-.nav__menu:hover { transform: rotate(90deg); }
-.nav__menu span {
-  display: block; width: 16px; height: 1.6px;
-  background: var(--ink); border-radius: 2px;
-  position: relative;
-}
-.nav__menu span::before, .nav__menu span::after {
-  content: ""; position: absolute; left: 0; width: 16px; height: 1.6px;
-  background: var(--ink); border-radius: 2px;
-}
-.nav__menu span::before { top: -5px; }
-.nav__menu span::after  { top:  5px; }
+/* Hamburger uses the 3D SquircleButton; just toggle visibility per breakpoint. */
+.nav__menu { display: none; z-index: 51; }
 
 /* When hero is on white background, nav text stays dark — that's fine here */
 
@@ -168,6 +152,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   inset: 90px 36px 0 36px;
   z-index: 1;
   background: url("/hero.jpg") 20% 60% / 100% auto no-repeat;
+  /* Pixel-consistent rounded top corners (CSS), wavy bottom (SVG mask) */
+  border-top-left-radius: 36px;
+  border-top-right-radius: 36px;
   -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 720' preserveAspectRatio='none'><path d='M0,0 L1200,0 L1200,640 C1050,690 920,640 760,668 C600,696 460,720 320,696 C190,672 80,710 0,690 Z' fill='black'/></svg>");
           mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 720' preserveAspectRatio='none'><path d='M0,0 L1200,0 L1200,640 C1050,690 920,640 760,668 C600,696 460,720 320,696 C190,672 80,710 0,690 Z' fill='black'/></svg>");
   -webkit-mask-size: 100% 100%;
@@ -229,11 +216,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   left: 60px;
   z-index: 4;
   display: flex; flex-direction: column; align-items: center; gap: 8px;
-  font-size: 10px; letter-spacing: 0.32em; font-weight: 700;
+  font-size: 11px; letter-spacing: 0.32em; font-weight: 900;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 .hero__scroll .line {
-  width: 1px; height: 56px; background: var(--ink);
+  width: 2px; height: 56px; background: #fff;
   position: relative; overflow: hidden;
+  border-radius: 2px;
 }
 .hero__scroll .line::after {
   content: ""; position: absolute; top: -56px; left: 0;
@@ -775,16 +765,123 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (max-width: 640px) {
   .nav { padding: 16px 20px; }
   .nav.scrolled { padding: 12px 20px; }
-  .nav__links { display: none; }
-  .hero { padding: 110px 20px 0; }
-  .hero__shape, .hero__photo { inset: 80px 16px 0 16px; }
+
+  /* Show hamburger on mobile */
+  .nav__menu { display: inline-flex; }
+
+  /* Mobile drawer: full-width panel that drops from the top of the nav */
+  .nav__links {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    position: fixed;
+    top: 70px;
+    left: 16px;
+    right: 16px;
+    background: var(--paper, #FCFBF7);
+    border: 1px solid var(--line, rgba(14,17,22,0.1));
+    border-radius: 18px;
+    padding: 18px 8px;
+    box-shadow: 0 24px 48px -16px rgba(14, 17, 22, 0.18);
+    /* Hidden by default — opens via .nav--open */
+    opacity: 0;
+    transform: translateY(-12px);
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 220ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1), visibility 220ms;
+    z-index: 50;
+  }
+  .nav.nav--open .nav__links {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: all;
+  }
+  .nav.nav--open.scrolled .nav__links { top: 62px; }
+  .nav__links .nav__link {
+    padding: 14px 16px;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-align: center;
+    border-radius: 10px;
+  }
+  .nav__links .nav__link::after { display: none; }
+  .nav__links .nav__link:active { background: rgba(14, 17, 22, 0.04); }
+  /* Center JA/EN toggle inside the mobile drawer */
+  .nav__links .lang-toggle {
+    align-self: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .hero { padding: 76px 20px 0; }
+  .hero__shape, .hero__photo { inset: -200px 16px 0 16px; }
   .hero__scroll { display: none; }
-  .hero__badge { right: 16px; bottom: 100px; width: 96px; height: 96px; }
+  .hero__badge { right: 16px; bottom: 240px; width: 96px; height: 96px; }
   .about, .what, .journey, .works, .contact { padding-left: 20px; padding-right: 20px; }
+  .about { padding-top: 80px; padding-bottom: 80px; }
+  /* About: stack vertically on mobile (photo → content → meta) */
+  .about__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .about__photo {
+    aspect-ratio: 1 / 1;
+    max-width: 320px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  /* Center About content on mobile */
+  .about__content { text-align: center; }
+  .about__heading h2 { text-align: center; }
+  .about__copy {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .about__signature { text-align: center; }
+  /* meta column-2 inline override + restyle border for stacked layout */
+  .about__meta {
+    grid-column: 1 / -1 !important;
+    border-left: none !important;
+    border-top: 1px solid var(--line);
+    padding-left: 0 !important;
+    padding-top: 28px;
+    align-items: center;
+    text-align: center;
+  }
+  .about__meta .row { justify-content: center; }
+  .about__social { justify-content: center; }
   .what__grid { grid-template-columns: 1fr; }
   .works__grid { grid-template-columns: 1fr 1fr; }
   .j-card { flex: 0 0 70%; }
   .contact__form .row { grid-template-columns: 1fr; }
+
+  /* Works: center title + arrows on mobile */
+  .works__title { text-align: center; }
+  .works__title h2,
+  .works__title p { text-align: center; }
+  .works__title .more,
+  .works__title .row-nav { justify-content: center; margin-left: auto; margin-right: auto; }
+
+  /* Blog teaser on home: center heading + more link */
+  .blog__head {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .blog__head h2,
+  .blog__head .more { text-align: center; }
+
+  /* LET'S CONNECT (Contact): center title + paragraph + plane */
+  .contact__title { text-align: center; }
+  .contact__title h2,
+  .contact__title p { text-align: center; }
+  .contact__title .plane { margin-left: auto; margin-right: auto; }
+
+  /* Carousel arrows centered (Works / Blog only) */
+  .row-nav { justify-content: center; }
 }
 
 /* ===== Split text reveal (Splitting.js) ===== */
@@ -1471,6 +1568,28 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .jcard__name { font-size: 22px; }
   .jcard__thumbs { padding: 0 18px 22px; }
   .jcard__thumb { flex: 0 0 72px; height: 54px; }
+}
+
+/* Mobile: take the full viewport height and pull image up */
+@media (max-width: 640px) {
+  .jpage {
+    padding: 28px 18px;
+    align-items: stretch;
+  }
+  .jpage__close { top: 36px; right: 28px; }
+  .jcard {
+    width: 100%;
+    min-height: calc(100vh - 56px);
+    border-radius: 18px;
+  }
+  .jcard__media {
+    padding: 12px 14px 0;
+    min-height: 0;
+  }
+  .jcard__photo { min-height: 220px; }
+  .jcard__body { padding: 18px 22px 12px; }
+  .jcard__num { margin-bottom: 14px; }
+  .jcard__thumbs { padding: 0 14px 18px; }
   .jpage__close { top: 84px; right: 16px; }
   .ghost-section--top h1 { font-size: 32px; }
 }
