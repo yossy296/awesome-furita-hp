@@ -74,7 +74,7 @@ export default function About() {
             randomness={3.5}
           >
             <img
-              src="/LINE_ALBUM_20260428_260428_64.jpg"
+              src="/furi-portrait.jpg"
               alt="Furi portrait"
               style={{
                 width: "100%",
