@@ -11,7 +11,7 @@ export const SITE = {
   legalName: "降田 義之",
   description:
     "3度のうつ病・ADHD診断を経て32カ国を踏破。立ち止まる人の次の一歩を創るFuriのポートフォリオ。",
-  defaultOgImage: "/hero.jpg",
+  defaultOgImage: "/og.jpg",
   logo: "/logo_circle.png",
   locale: "ja_JP",
   alternateLocale: "en_US",

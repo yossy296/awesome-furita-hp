@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { SITE } from "@/lib/site";
+import InitialLoader from "@/components/InitialLoader";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -65,7 +66,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja">
+    <html lang="ja" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body data-screen-label="Furi LP">
+        <InitialLoader />
         <I18nProvider>{children}</I18nProvider>
       </body>
     </html>
