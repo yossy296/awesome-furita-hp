@@ -1573,23 +1573,35 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* Mobile: take the full viewport height and pull image up */
 @media (max-width: 640px) {
   .jpage {
-    padding: 28px 18px;
-    align-items: stretch;
+    padding: 24px 14px;
+    align-items: center;
   }
-  .jpage__close { top: 36px; right: 28px; }
+  .jpage__close { top: 22px; right: 22px; }
   .jcard {
     width: 100%;
-    min-height: calc(100vh - 56px);
+    /* Let content determine height — no forced full viewport */
+    min-height: 0;
     border-radius: 18px;
   }
   .jcard__media {
-    padding: 12px 14px 0;
+    padding: 0 12px;
     min-height: 0;
   }
-  .jcard__photo { min-height: 220px; }
-  .jcard__body { padding: 18px 22px 12px; }
-  .jcard__num { margin-bottom: 14px; }
-  .jcard__thumbs { padding: 0 14px 18px; }
+  .jcard__photo { min-height: 0; }
+  /* Plain (modal) photo: shorter aspect on mobile so the modal isn't tall. */
+  .jcard__photo--plain { margin-top: 0; aspect-ratio: 16 / 10; }
+  .jcard__body { padding: 14px 20px 8px; }
+  .jcard__num { margin-bottom: 6px; font-size: 20px; }
+  .jcard__name { font-size: 22px; margin: 0 0 6px; }
+  .jcard__tags { margin-bottom: 12px; }
+  .jcard__copy {
+    font-size: 13px;
+    line-height: 1.75;
+    max-height: 180px;
+    margin: 0 0 16px;
+  }
+  .jcard__thumbs { padding: 0 12px 14px; }
+  .jcard__thumb { flex: 0 0 56px; height: 42px; }
   .jpage__close { top: 84px; right: 16px; }
   .ghost-section--top h1 { font-size: 32px; }
 }
@@ -1785,7 +1797,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   height: auto;
   min-height: 0;
   max-height: none;
-  margin-top: 80px;
+}
+/* Desktop only: align photo with body content via top margin. Mobile keeps it
+   flush to the top of the modal. */
+@media (min-width: 861px) {
+  .jcard__photo--plain { margin-top: 80px; }
 }
 .jcard__photo--plain img {
   width: 100%;
