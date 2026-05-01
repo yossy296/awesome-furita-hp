@@ -128,8 +128,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background: var(--ink); transition: width 200ms ease, left 200ms ease;
 }
 .nav__link:hover::after { width: 100%; left: 0; }
-/* Hamburger uses the 3D SquircleButton; just toggle visibility per breakpoint. */
-.nav__menu { display: none; z-index: 51; }
+/* Hamburger uses the 3D SquircleButton; just toggle visibility per breakpoint.
+   !important is required because .squircle-btn declares display: inline-block
+   later in the file with the same specificity. */
+.nav__menu { display: none !important; z-index: 51; }
 
 /* When hero is on white background, nav text stays dark — that's fine here */
 
@@ -767,7 +769,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .nav.scrolled { padding: 12px 20px; }
 
   /* Show hamburger on mobile */
-  .nav__menu { display: inline-flex; }
+  .nav__menu { display: inline-flex !important; }
 
   /* Mobile drawer: full-width panel that drops from the top of the nav */
   .nav__links {

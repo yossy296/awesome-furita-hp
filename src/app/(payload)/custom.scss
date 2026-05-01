@@ -2,6 +2,33 @@
    Furi Admin custom theme
    =================================================*/
 
+/* Force Payload's theme tokens to light values regardless of system color
+   scheme or [data-theme]. The admin is light-mode only. */
+:root,
+html,
+html[data-theme="light"],
+html[data-theme="dark"] {
+  color-scheme: light;
+  --theme-bg: #F4F5F7;
+  --theme-input-bg: #FFFFFF;
+  --theme-text: #0E1116;
+  --theme-elevation-0:    #FFFFFF;
+  --theme-elevation-50:   #FCFBF7;
+  --theme-elevation-100:  #F4F5F7;
+  --theme-elevation-150:  #ECEEF1;
+  --theme-elevation-200:  #E5E7EB;
+  --theme-elevation-250:  #DDE0E5;
+  --theme-elevation-300:  #C4C9D1;
+  --theme-elevation-400:  #8A93A0;
+  --theme-elevation-500:  #4A5260;
+  --theme-elevation-600:  #2C313A;
+  --theme-elevation-700:  #1E2229;
+  --theme-elevation-800:  #14181F;
+  --theme-elevation-850:  #0E1014;
+  --theme-elevation-900:  #0A0C0F;
+  --theme-elevation-1000: #000000;
+}
+
 :root {
   --furi-paper: #FCFBF7;
   --furi-paper-2: #F4F1E8;
@@ -1619,4 +1646,278 @@ body[data-theme="light"]::after {
   -webkit-box-orient: vertical;
   overflow: hidden;
   word-break: break-all;
+}
+
+/* BlockNote: enlarge interactive controls (drag handle, +-add, formatting
+   toolbar, slash menu). Sizes are bumped globally — desktop and mobile both
+   benefit from a larger touch target. */
+.bn-side-menu .mantine-UnstyledButton-root {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  border-radius: 8px !important;
+}
+.bn-side-menu .mantine-UnstyledButton-root svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+.bn-toolbar .mantine-ActionIcon-root,
+.bn-toolbar .mantine-Button-root {
+  min-width: 40px !important;
+  min-height: 40px !important;
+  padding: 8px 10px !important;
+  font-size: 14px !important;
+  border-radius: 8px !important;
+}
+.bn-toolbar .mantine-ActionIcon-root svg,
+.bn-toolbar .mantine-Button-root svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+.bn-toolbar .mantine-Menu-item,
+.bn-menu-dropdown .mantine-Menu-item,
+.bn-suggestion-menu .mantine-Menu-item {
+  min-height: 46px !important;
+  font-size: 14px !important;
+  padding: 10px 14px !important;
+  gap: 12px !important;
+  line-height: 1.35 !important;
+}
+.bn-toolbar .mantine-Menu-item svg,
+.bn-menu-dropdown .mantine-Menu-item svg,
+.bn-suggestion-menu .mantine-Menu-item svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* Slash command suggestion menu (Notion-style) item titles & shortcuts */
+.bn-suggestion-menu-item,
+.bn-suggestion-menu-item .mantine-Menu-item {
+  min-height: 50px !important;
+  font-size: 14px !important;
+}
+
+/* Drag handle (the ⋮⋮ icon) */
+.bn-mantine .bn-drag-handle-menu,
+.bn-drag-handle {
+  min-width: 32px !important;
+  min-height: 32px !important;
+}
+.bn-drag-handle svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* BlockNote host wrapper (Posts body field). Mobile-tap-to-fullscreen modal
+   with slide-up animation on enter and slide-down on exit. */
+.bn-host {
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  background: #FFFFFF;
+  padding: 8px;
+  min-height: 360px;
+  position: relative;
+}
+
+/* Backdrop fades in / out behind the fullscreen drawer */
+.bn-host__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(14, 17, 22, 0.42);
+  backdrop-filter: blur(2px);
+  animation: bnHostBackdropIn 360ms ease forwards;
+}
+.bn-host__backdrop--closing {
+  animation: bnHostBackdropOut 360ms ease forwards;
+}
+@keyframes bnHostBackdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes bnHostBackdropOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Fullscreen drawer slides from the bottom */
+.bn-host--fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  background: #FFFFFF !important;
+  border-radius: 18px 18px 0 0 !important;
+  border: none !important;
+  padding: 60px 0 16px !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  animation: bnHostSlideIn 360ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+.bn-host--fullscreen.bn-host--closing {
+  animation: bnHostSlideOut 360ms cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+@keyframes bnHostSlideIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes bnHostSlideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0.4;
+  }
+}
+
+.bn-host--fullscreen .bn-host__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+.bn-host__done {
+  position: fixed !important;
+  top: 14px !important;
+  right: 14px !important;
+  z-index: 10000 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--furi-ink, #0E1116) !important;
+  color: var(--furi-lime, #DCFF1E) !important;
+  border: none !important;
+  padding: 10px 22px !important;
+  border-radius: 999px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  cursor: pointer;
+  box-shadow: 0 8px 18px -6px rgba(14, 17, 22, 0.35);
+  transition: transform 160ms ease, background 160ms ease;
+  animation: bnHostDoneIn 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.bn-host--closing .bn-host__done {
+  animation: bnHostDoneOut 240ms ease forwards;
+}
+.bn-host__done:active { transform: scale(0.95); }
+@keyframes bnHostDoneIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes bnHostDoneOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-12px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bn-host--fullscreen,
+  .bn-host--fullscreen.bn-host--closing,
+  .bn-host__backdrop,
+  .bn-host__backdrop--closing,
+  .bn-host__done,
+  .bn-host--closing .bn-host__done {
+    animation-duration: 1ms !important;
+  }
+}
+
+/* ================================================================
+   Mobile FAB — Convert "Create New" buttons to a floating action button
+   on small screens. Targets primary buttons whose href ends with /create
+   (i.e. collection list page Create buttons), leaves Save and other
+   primaries untouched.
+   ================================================================ */
+@media (max-width: 640px) {
+  /* Payload v3 renders the list-page Create button via Button component with
+     buttonStyle="pill" + className="list-create-new-doc__create-new-button". */
+  .list-create-new-doc__create-new-button,
+  a.btn[href$="/create"] {
+    position: fixed !important;
+    bottom: 22px !important;
+    right: 22px !important;
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 60px !important;
+    min-height: 60px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    z-index: 200 !important;
+    overflow: hidden !important;
+    /* Hide the text label */
+    color: transparent !important;
+    font-size: 0 !important;
+    text-indent: 100% !important;
+    white-space: nowrap !important;
+    box-shadow: 0 14px 28px -8px rgba(14, 17, 22, 0.25),
+                0 6px 12px -4px rgba(14, 17, 22, 0.12) !important;
+    background: #FFFFFF !important;
+    border: 1px solid var(--furi-line, #E6E1D2) !important;
+    transition: transform 200ms ease, box-shadow 200ms ease !important;
+  }
+  .list-create-new-doc__create-new-button:active,
+  a.btn[href$="/create"]:active {
+    transform: scale(0.94);
+  }
+  .list-create-new-doc__create-new-button::before,
+  a.btn[href$="/create"]::before {
+    content: "+";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--furi-ink, #0E1116);
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 800;
+    text-indent: 0;
+  }
+  /* Hide the inner span/text content of the pill button */
+  .list-create-new-doc__create-new-button .btn__content,
+  .list-create-new-doc__create-new-button .btn__label,
+  a.btn[href$="/create"] .btn__content,
+  a.btn[href$="/create"] .btn__label {
+    visibility: hidden;
+  }
+
+}
+
+/* ================================================================
+   Mobile: pin Save / publish bar to the bottom of the viewport.
+   Wider breakpoint (900px) so portrait tablets / narrow desktops also benefit.
+   ================================================================ */
+@media (max-width: 900px) {
+  body .doc-controls,
+  body .collection-edit__doc-controls,
+  body [class~="doc-controls"] {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    top: auto !important;
+    margin: 0 !important;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+    border-radius: 0 !important;
+    border: none !important;
+    border-top: 1px solid var(--adm-line-1, #ECEEF1) !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 -8px 24px -10px rgba(14, 17, 22, 0.18) !important;
+    z-index: 60 !important;
+    width: 100% !important;
+  }
+  /* Push the form content up so it isn't hidden behind the fixed bar */
+  body .collection-edit__main,
+  body .collection-edit,
+  body .document-fields {
+    padding-bottom: 110px !important;
+  }
 }
