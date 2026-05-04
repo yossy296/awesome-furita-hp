@@ -25,7 +25,7 @@ function buildDb() {
     pool: {
       connectionString: uri,
       ssl: isRemote ? { rejectUnauthorized: false } : undefined,
-      max: 1,
+      max: 10,
       idleTimeoutMillis: 0,
     },
   });
